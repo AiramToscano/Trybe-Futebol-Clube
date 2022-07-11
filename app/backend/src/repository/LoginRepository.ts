@@ -6,8 +6,8 @@ export default class LoginRepository implements IModel {
     this.model = model;
   }
 
-  async findOne(email: string, password: string):Promise<Users> {
-    const listUser = await this.model.findOne({ where: { email, password } });
+  async findOne(email: string):Promise<Users> {
+    const listUser = await this.model.findOne({ where: { email } });
     return listUser as Users;
   }
 }
