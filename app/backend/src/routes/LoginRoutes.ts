@@ -3,16 +3,20 @@ import LoginController from '../controllers/LoginControllers';
 import Loginservices from '../services/LoginService';
 import LoginRepository from '../repository/LoginRepository';
 import ValidatorLogin from '../utils/ValidatorLogin';
+import CreateJWT from '../utils/CreateJwt';
 
 const LoginRoute = Router();
 const LoginValidade = new ValidatorLogin(new Loginservices(new LoginRepository()));
-const Logincontroller = new LoginController(new Loginservices(new LoginRepository()));
+const Logincontroller = new LoginController(
+  new Loginservices(new LoginRepository()),
+  new CreateJWT(new LoginRepository()),
+);
 
 LoginRoute.post(
   '/login',
-  ValidatorLogin.validatEmail,
+  LoginValidade.validatEmail,
   LoginValidade.validaPassword,
-  Logincontroller.getUsers,
+  Logincontroller.AuthUser,
 );
 
 export default LoginRoute;

@@ -7,14 +7,14 @@ export default class ValidatorLogin {
     this.service = service;
   }
 
-  static validatEmail = (req: Request, res: Response, next: NextFunction) => {
+  validatEmail = (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body;
     const emailValid = Joi.object().keys({
       email: Joi.string().email(),
     });
     const validEmail = emailValid.validate({ email });
     if (!email) return res.status(400).json({ message: 'All fields must be filled' });
-    if (validEmail.error) return res.status(400).json({ message: 'Incorrect email or password' });
+    if (validEmail.error) return res.status(401).json({ message: 'Incorrect email or password' });
     next();
   };
 
@@ -27,4 +27,5 @@ export default class ValidatorLogin {
     if (!user) return res.status(401).json({ message: 'Incorrect email or password' });
     next();
   };
+
 }

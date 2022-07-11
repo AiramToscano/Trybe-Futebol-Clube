@@ -5,5 +5,9 @@ export interface IModel {
 }
 
 export interface Iservice {
-  findUser(email: string, password: string):Promise<Users | boolean>
+  findUser(email: string, password: string):Promise<string | boolean>
+}
+
+export interface Ijwt {
+  createJwt(email: string):Promise<string>
 }
