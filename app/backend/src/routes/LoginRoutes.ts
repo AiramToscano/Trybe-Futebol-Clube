@@ -14,9 +14,10 @@ const Logincontroller = new LoginController(
 
 LoginRoute.post(
   '/login',
-  LoginValidade.validatEmail,
-  LoginValidade.validaPassword,
+  LoginValidade.validEmail,
+  LoginValidade.validPassword,
   Logincontroller.AuthUser,
 );
+LoginRoute.get('/login/:validate', Logincontroller.AuthToken);
 
 export default LoginRoute;
