@@ -8,6 +8,7 @@ export default class LoginService implements Iservice {
 
   async findUser(email: string, password: string):Promise<boolean> {
     const listUser = await this.model.findOne(email);
+    if (listUser === null) return false;
     const validPassword = bcrypt.compareSync(password, listUser.password);
     if (validPassword) return true;
     return false;
