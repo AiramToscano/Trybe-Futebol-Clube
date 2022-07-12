@@ -6,7 +6,7 @@ export interface IModel {
 }
 
 export interface Iservice {
-  findUser(email: string, password: string):Promise<string | boolean>
+  findUser(email: string, password: string):Promise<void | boolean>
 }
 
 export interface Ijwt {
