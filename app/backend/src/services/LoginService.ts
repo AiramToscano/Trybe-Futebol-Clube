@@ -10,7 +10,6 @@ export default class LoginService implements Iservice {
     const listUser = await this.model.findOne(email);
     if (listUser === null) return false;
     const validPassword = bcrypt.compareSync(password, listUser.password);
-    if (validPassword) return true;
-    return false;
+    return validPassword;
   }
 }
