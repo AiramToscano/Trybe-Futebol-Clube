@@ -9,41 +9,38 @@ class Matches extends Model {
   awayTeam!: number;
   awayTeamGoals!: number;
   inProgress!: boolean;
+  teamHome!: object;
+  teamAway!: object;
 }
 
 Matches.init({
   id: {
     type: INTEGER,
-    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
   homeTeam: {
     type: INTEGER,
-    allowNull: false,
   },
   homeTeamGoals: {
     type: INTEGER,
-    allowNull: false,
   },
   awayTeam: {
     type: INTEGER,
-    allowNull: false,
   },
   awayTeamGoals: {
     type: INTEGER,
-    allowNull: false,
   },
   inProgress: {
     type: BOOLEAN,
-    allowNull: false,
   },
 }, {
   sequelize: db,
   modelName: 'matches',
+  underscored: true,
   timestamps: false });
 
-Matches.belongsTo(Teams, { foreignKey: 'home_Team', as: 'teamHome' });
-Matches.belongsTo(Teams, { foreignKey: 'away_Team', as: 'teamAway' });
+Matches.belongsTo(Teams, { foreignKey: 'homeTeam', as: 'teamHome' });
+Matches.belongsTo(Teams, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 export default Matches;

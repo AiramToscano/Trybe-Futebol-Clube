@@ -10,9 +10,6 @@ export default class MatchesRepository implements IModelMatches {
 
   async findMatches():Promise<Matches[]> {
     const findmatches = await this.model.findAll({
-      attributes: ['id', ['home_Team', 'homeTeam'], ['home_Team_Goals', 'homeTeamGoals'],
-        ['away_Team', 'awayTeam'], ['away_Team_Goals',
-          'awayTeamGoals'], ['in_Progress', 'inProgress']],
       include: [{
         model: Team,
         as: 'teamHome',
@@ -27,5 +24,21 @@ export default class MatchesRepository implements IModelMatches {
       }],
     });
     return findmatches as Matches[];
+  }
+
+  async createMatches(
+    homeTeam: number,
+    awayTeam: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ):Promise<Matches> {
+    const creatematches = await this.model.create({
+      homeTeam,
+      homeTeamGoals,
+      awayTeam,
+      awayTeamGoals,
+      inProgress: true,
+    });
+    return creatematches as Matches;
   }
 }

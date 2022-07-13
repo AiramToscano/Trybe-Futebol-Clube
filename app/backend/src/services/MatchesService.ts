@@ -10,4 +10,15 @@ export default class MatchesService implements IserviceMatches {
     const listteams = await this.model.findMatches();
     return listteams;
   }
+
+  async createMatches(
+    homeTeam: number,
+    awayTeam: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ):Promise<Matches> {
+    const cratematches = await this.model
+      .createMatches(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
+    return cratematches;
+  }
 }

@@ -11,7 +11,7 @@ export default class TeamInterfaces {
       const getteams = await this.service.findTeams();
       return res.status(200).json(getteams);
     } catch (err) {
-      return res.status(500).json({ message: 'Ocorreu um erro inesperado' });
+      return res.status(500).json({ error: err });
     }
   };
 
