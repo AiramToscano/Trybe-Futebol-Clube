@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IserviceMatches } from '../interfaces/Matchesnterfaces';
+import { IserviceMatches } from '../interfaces/Matchesinterfaces';
 
 export default class TeamInterfaces {
   constructor(private service: IserviceMatches) {
