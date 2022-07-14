@@ -8,7 +8,7 @@ export default class TeamInterfaces {
 
   public getMatches = async (_req: Request, res: Response): Promise<object> => {
     try {
-      const getmatches = await this.service.findMatches();
+      const getmatches = await this.service.findmatchesall();
       return res.status(200).json(getmatches);
     } catch (err) {
       return res.status(500).json({ error: err });
@@ -26,24 +26,22 @@ export default class TeamInterfaces {
     }
   };
 
-  public updatematches = async (req: Request, res: Response): Promise<object | undefined> => {
+  updatematchesInProgress = async (req: Request, res: Response): Promise<object | undefined> => {
     try {
       const { id } = req.params;
-      const updatematches = await this.service.updatematches(Number(id));
-      if (updatematches != null) {
-        return res.status(200).json({ message: 'Finished' });
-      }
+      await this.service.updatematchesInProgress(Number(id));
+      return res.status(200).json({ message: 'Finished' });
     } catch (err) {
       return res.status(500).json({ error: err });
     }
   };
 
-  public updatematchesbyId = async (req: Request, res: Response): Promise<object | undefined> => {
+  public updatematchesScore = async (req: Request, res: Response): Promise<object | undefined> => {
     try {
       const { id } = req.params;
       const { homeTeamGoals, awayTeamGoals } = req.body;
       const updatematches = await this.service
-        .updatematchesbyId(Number(id), homeTeamGoals, awayTeamGoals);
+        .updatematchesScore(Number(id), homeTeamGoals, awayTeamGoals);
       if (updatematches != null) {
         return res.status(200).json({ message: 'Atualizou' });
       }

@@ -27,11 +27,11 @@ MatchesRoute.post(
 );
 MatchesRoute.patch(
   '/matches/:id/finish',
-  Matchescontroller.updatematches,
+  Matchescontroller.updatematchesInProgress,
 );
 MatchesRoute.patch(
   '/matches/:id',
-  Matchescontroller.updatematchesbyId,
+  Matchescontroller.updatematchesScore,
 );
 
 export default MatchesRoute;

@@ -9,8 +9,8 @@ export default class ValidatorMatches {
 
   MatchesNotFound = async (req: Request, res: Response, next: NextFunction) => {
     const { homeTeam, awayTeam } = req.body;
-    const hometeam = await this.service.updatematches(Number(homeTeam));
-    const awayteam = await this.service.updatematches(Number(awayTeam));
+    const hometeam = await this.service.findmatches(homeTeam);
+    const awayteam = await this.service.findmatches(awayTeam);
     if (!hometeam || !awayteam) {
       return res.status(404).json({ message: 'There is no team with such id!' });
     }

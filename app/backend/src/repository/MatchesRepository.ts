@@ -8,7 +8,7 @@ export default class MatchesRepository implements IModelMatches {
     this.model = model;
   }
 
-  async findMatches():Promise<Matches[]> {
+  async findmatchesall():Promise<Matches[]> {
     const findmatches = await this.model.findAll({
       include: [{
         model: Team,
@@ -42,37 +42,41 @@ export default class MatchesRepository implements IModelMatches {
     return creatematches as Matches;
   }
 
-  async updatematches(matchesid:number):Promise<Matches | null> {
-    const Findmatches = await this.model.findOne({
-      where: { id: matchesid } });
-    if (Findmatches != null) {
-      Findmatches.inProgress = false;
-      await Findmatches.save();
-    }
-    return Findmatches as Matches;
+  async updatematchesInProgress(matchesid:number):Promise<boolean> {
+    await this.model.update(
+      {
+        inProgress: false,
+      },
+      {
+        where: { id: matchesid },
+      },
+    );
+    return true;
   }
 
   async findmatches(matchesid:number):Promise<boolean> {
     const Findmatches = await this.model.findOne({
       where: { id: matchesid } });
-    if (Findmatches != null) {
-      return true;
+    if (Findmatches === null) {
+      return false;
     }
-    return false;
+    return true;
   }
 
-  async updatematchesbyId(
+  async updatematchesScore(
     matchesid: number,
     homeTeamGoals:number,
     awayTeamGoals: number,
-  ):Promise<Matches> {
-    const Findmatches = await this.model.findOne({
-      where: { id: matchesid } });
-    if (Findmatches != null) {
-      Findmatches.homeTeamGoals = homeTeamGoals;
-      Findmatches.awayTeamGoals = awayTeamGoals;
-      await Findmatches.save();
-    }
-    return Findmatches as Matches;
+  ):Promise<boolean> {
+    await this.model.update(
+      {
+        homeTeamGoals,
+        awayTeamGoals,
+      },
+      {
+        where: { id: matchesid },
+      },
+    );
+    return true;
   }
 }
