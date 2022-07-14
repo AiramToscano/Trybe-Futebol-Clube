@@ -41,4 +41,38 @@ export default class MatchesRepository implements IModelMatches {
     });
     return creatematches as Matches;
   }
+
+  async updatematches(matchesid:number):Promise<Matches | null> {
+    const Findmatches = await this.model.findOne({
+      where: { id: matchesid } });
+    if (Findmatches != null) {
+      Findmatches.inProgress = false;
+      await Findmatches.save();
+    }
+    return Findmatches as Matches;
+  }
+
+  async findmatches(matchesid:number):Promise<boolean> {
+    const Findmatches = await this.model.findOne({
+      where: { id: matchesid } });
+    if (Findmatches != null) {
+      return true;
+    }
+    return false;
+  }
+
+  async updatematchesbyId(
+    matchesid: number,
+    homeTeamGoals:number,
+    awayTeamGoals: number,
+  ):Promise<Matches> {
+    const Findmatches = await this.model.findOne({
+      where: { id: matchesid } });
+    if (Findmatches != null) {
+      Findmatches.homeTeamGoals = homeTeamGoals;
+      Findmatches.awayTeamGoals = awayTeamGoals;
+      await Findmatches.save();
+    }
+    return Findmatches as Matches;
+  }
 }

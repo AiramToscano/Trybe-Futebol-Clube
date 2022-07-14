@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import { IserviceMatches } from '../interfaces/Matchesinterfaces';
-import { Ijwt } from '../interfaces/LoginInterfaces';
 
 export default class TeamInterfaces {
-  constructor(private service: IserviceMatches, private jwt: Ijwt) {
+  constructor(private service: IserviceMatches) {
     this.service = service;
   }
 
@@ -19,12 +18,35 @@ export default class TeamInterfaces {
   public createMatches = async (req: Request, res: Response): Promise<object> => {
     try {
       const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
-      const { authorization } = req.headers;
-      const user = await this.jwt.validJwt(authorization);
-      if (!user) return res.status(400).json({ message: 'Token expired or invalid' });
       const matches = await this.service
         .createMatches(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
       return res.status(201).json(matches);
+    } catch (err) {
+      return res.status(500).json({ error: err });
+    }
+  };
+
+  public updatematches = async (req: Request, res: Response): Promise<object | undefined> => {
+    try {
+      const { id } = req.params;
+      const updatematches = await this.service.updatematches(Number(id));
+      if (updatematches != null) {
+        return res.status(200).json({ message: 'Finished' });
+      }
+    } catch (err) {
+      return res.status(500).json({ error: err });
+    }
+  };
+
+  public updatematchesbyId = async (req: Request, res: Response): Promise<object | undefined> => {
+    try {
+      const { id } = req.params;
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      const updatematches = await this.service
+        .updatematchesbyId(Number(id), homeTeamGoals, awayTeamGoals);
+      if (updatematches != null) {
+        return res.status(200).json({ message: 'Atualizou' });
+      }
     } catch (err) {
       return res.status(500).json({ error: err });
     }

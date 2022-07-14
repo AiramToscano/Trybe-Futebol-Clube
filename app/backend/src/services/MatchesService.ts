@@ -21,4 +21,18 @@ export default class MatchesService implements IserviceMatches {
       .createMatches(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
     return cratematches;
   }
+
+  async updatematches(matchesid: number):Promise<Matches | null> {
+    const listteams = await this.model.updatematches(matchesid);
+    return listteams;
+  }
+
+  async updatematchesbyId(
+    idMatche: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ):Promise<boolean> {
+    await this.model.updatematchesbyId(idMatche, homeTeamGoals, awayTeamGoals);
+    return true;
+  }
 }
