@@ -22,7 +22,7 @@ export default class LeaderboardsService {
     const hometimes: Array<Matchestimes> = [];
     Teams.forEach((teams) => {
       ListTeam.forEach((e) => {
-        if (teams.id === e.homeTeam || teams.id === e.awayTeam) {
+        if (teams.id === e.homeTeam) {
           hometimes.push({
             name: teams.teamName,
             goalsFavor: e.homeTeamGoals,
