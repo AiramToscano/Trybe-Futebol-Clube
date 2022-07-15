@@ -27,26 +27,16 @@ export default class TeamInterfaces {
   };
 
   updatematchesInProgress = async (req: Request, res: Response): Promise<object | undefined> => {
-    try {
-      const { id } = req.params;
-      await this.service.updatematchesInProgress(Number(id));
-      return res.status(200).json({ message: 'Finished' });
-    } catch (err) {
-      return res.status(500).json({ error: err });
-    }
+    const { id } = req.params;
+    await this.service.updatematchesInProgress(Number(id));
+    return res.status(200).json({ message: 'Finished' });
   };
 
   public updatematchesScore = async (req: Request, res: Response): Promise<object | undefined> => {
-    try {
-      const { id } = req.params;
-      const { homeTeamGoals, awayTeamGoals } = req.body;
-      const updatematches = await this.service
-        .updatematchesScore(Number(id), homeTeamGoals, awayTeamGoals);
-      if (updatematches != null) {
-        return res.status(200).json({ message: 'Atualizou' });
-      }
-    } catch (err) {
-      return res.status(500).json({ error: err });
-    }
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    await this.service
+      .updatematchesScore(Number(id), homeTeamGoals, awayTeamGoals);
+    return res.status(200).json({ message: 'Atualizou' });
   };
 }

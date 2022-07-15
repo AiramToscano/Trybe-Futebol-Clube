@@ -6,6 +6,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import Matches from '../database/models/Matches';
 import jwt from '../utils/CreateJwt';
+import User from '../database/models/Users';
 
 import { Response } from 'superagent';
 
@@ -161,12 +162,6 @@ describe('Verificar se é possivel atualizar cadastro em /matches/:id/finish ', 
       chaiHttpResponse = await chai.request(app).patch('/matches/:id/finish')
       expect(chaiHttpResponse.status).to.be.equal(200);
       expect(chaiHttpResponse.body).to.deep.equal({ message: "Finished" });
-      // expect(chaiHttpResponse.body).to.be.have.property('id');
-      // expect(chaiHttpResponse.body).to.be.have.property('homeTeam');
-      // expect(chaiHttpResponse.body).to.be.have.property('homeTeamGoals');
-      // expect(chaiHttpResponse.body).to.be.have.property('awayTeam');
-      // expect(chaiHttpResponse.body).to.be.have.property('awayTeamGoals');
-      // expect(chaiHttpResponse.body).to.be.have.property('inProgress');
     });
   });
 
@@ -197,11 +192,13 @@ describe('Verificar se é possivel atualizar cadastro em /matches/:id/finish ', 
   //    * Exemplo do uso de stubs com tipos
   //    */
   //    let chaiHttpResponse: Response;
-  //    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFpcmFtbG9iYXRvQGdtYWlsLmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.RaEPuup6mH3RsQADVTH_VKpSDtLW4PS-To9-3LhaI38';
-  
+  //    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.m55D98KpiFKsSxXBpexNNYUlJhFmY-3_cMoFrRMyfGg'
+    
   //    before(async () => {
-  //     sinon
-  //       .stub(jwt, "findOne")
+  //    sinon
+  //       .stub().resolves(token);
+  //    sinon
+  //       .stub(Matches, "findOne")
   //       .resolves({
   //           id: 1,
   //           homeTeam: 16,
@@ -209,26 +206,29 @@ describe('Verificar se é possivel atualizar cadastro em /matches/:id/finish ', 
   //           awayTeam: 8,
   //           awayTeamGoals: 2,
   //           inProgress: true,
-  //       } as jwt);
+  //       } as Matches);
+  //   });
 
   //   after(()=>{
-  //     (Matches.create as sinon.SinonStub).restore();
+  //     (Matches.findOne as sinon.SinonStub).restore();
   //   })
   
   //   it('Verificar se é possivel criar matches com jwt valido', async () => {
   //     chaiHttpResponse = await chai.request(app).post('/matches')
-  //     .set("Authorization", token).send({
+  //     .set({
+  //       authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.m55D98KpiFKsSxXBpexNNYUlJhFmY-3_cMoFrRMyfGg',
+  //     }).send({
   //       homeTeam: 16,
   //       awayTeam: 8,
   //       homeTeamGoals: 2,
   //       awayTeamGoals: 2,
   //     })
   //     expect(chaiHttpResponse.status).to.be.equal(201);
-  //     expect(chaiHttpResponse.body).to.be.have.property('id');
-  //     expect(chaiHttpResponse.body).to.be.have.property('homeTeam');
-  //     expect(chaiHttpResponse.body).to.be.have.property('homeTeamGoals');
-  //     expect(chaiHttpResponse.body).to.be.have.property('awayTeam');
-  //     expect(chaiHttpResponse.body).to.be.have.property('awayTeamGoals');
-  //     expect(chaiHttpResponse.body).to.be.have.property('inProgress');
+  //     // expect(chaiHttpResponse.body).to.be.have.property('id');
+  //     // expect(chaiHttpResponse.body).to.be.have.property('homeTeam');
+  //     // expect(chaiHttpResponse.body).to.be.have.property('homeTeamGoals');
+  //     // expect(chaiHttpResponse.body).to.be.have.property('awayTeam');
+  //     // expect(chaiHttpResponse.body).to.be.have.property('awayTeamGoals');
+  //     // expect(chaiHttpResponse.body).to.be.have.property('inProgress');
   //   });
   // });

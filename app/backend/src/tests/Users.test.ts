@@ -96,7 +96,7 @@ describe('Verificar o end point /login/validade', () => {
 
   it('verifica se endpoint retorna os dados corretamente', async () => {
     chaiHttpResponse = await chai.request(app).get('/login/:validate').set({
-      Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFpcmFtbG9iYXRvQGdtYWlsLmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.RaEPuup6mH3RsQADVTH_VKpSDtLW4PS-To9-3LhaI38',
+      authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFpcmFtbG9iYXRvQGdtYWlsLmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.RaEPuup6mH3RsQADVTH_VKpSDtLW4PS-To9-3LhaI38',
     })
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.be.have.property('role');

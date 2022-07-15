@@ -9,8 +9,13 @@ class Matches extends Model {
   awayTeam!: number;
   awayTeamGoals!: number;
   inProgress!: boolean;
-  teamHome!: object;
-  teamAway!: object;
+  teamHome!: {
+    teamName:string;
+  };
+
+  teamAway!: {
+    teamName:string;
+  };
 }
 
 Matches.init({
