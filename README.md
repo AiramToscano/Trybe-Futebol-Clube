@@ -41,5 +41,9 @@ obs: Caso o npm install não instale as dependências do backend e do frontend, 
 - `npm run test`
 obs: Importante está na pasta de backend do projeto.
 
-![Tryunfo](https://github.com/AiramToscano/Projeto-Tryunfo/blob/airam-toscano-tryunfo/requisito-4.png)
+---
+
+### Preview do front end ja disponibilizado :
+
+![Trybe Futebol Clube](https://github.com/AiramToscano/Trybe-Futebol-Clube/blob/airamtoscano/tfc.png)
 
