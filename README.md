@@ -43,7 +43,7 @@ obs: Importante está na pasta de backend do projeto.
 
 ---
 
-### Preview do front end ja disponibilizado :
+### Preview do Front-end ja disponibilizado :
 
 ![Trybe Futebol Clube](https://github.com/AiramToscano/Trybe-Futebol-Clube/blob/airamtoscano/tfc.png)
 
