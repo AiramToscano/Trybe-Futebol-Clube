@@ -11,14 +11,24 @@ export default class LeaderboardsService {
     this.modeltimes = modeltimes;
   }
 
-  async findmatchesall():Promise<Array<Matchestimes>> {
+  async findmatchesall(routes: string):Promise<Array<Matchestimes>> {
     const listteams = await this.model.findmatchesall();
     const teams = await this.modeltimes.findTeams();
-    const matches = this.returnMatches(teams, listteams);
-    return matches;
+    if (routes === 'home') {
+      const matchesHome = this.returnMatchesHome(teams, listteams);
+      return matchesHome;
+    }
+    if (routes === 'away') {
+      const matchesAway = this.returnMatchesAway(teams, listteams);
+      return matchesAway;
+    }
+    const matchesHome = this.returnMatchesHome(teams, listteams);
+    const matchesAway = this.returnMatchesAway(teams, listteams);
+    const matchesAll = [...matchesHome, ...matchesAway];
+    return matchesAll;
   }
 
-  returnMatches = (Teams: Array<any>, ListTeam: Array<any>) => {
+  returnMatchesHome = (Teams: Array<any>, ListTeam: Array<any>) => {
     const hometimes: Array<Matchestimes> = [];
     Teams.forEach((teams) => {
       ListTeam.forEach((e) => {
@@ -35,5 +45,24 @@ export default class LeaderboardsService {
       });
     });
     return hometimes;
+  };
+
+  returnMatchesAway = (Teams: Array<any>, ListTeam: Array<any>) => {
+    const awaytimes: Array<Matchestimes> = [];
+    Teams.forEach((teams) => {
+      ListTeam.forEach((e) => {
+        if (teams.id === e.awayTeam) {
+          awaytimes.push({
+            name: teams.teamName,
+            goalsFavor: e.awayTeamGoals,
+            goalsOwn: e.homeTeamGoals,
+            totalVictories: e.awayTeamGoals > e.homeTeamGoals ? +1 : 0,
+            totalLosses: e.awayTeamGoals < e.homeTeamGoals ? +1 : 0,
+            totalDraws: e.homeTeamGoals === e.awayTeamGoals ? +1 : 0,
+          });
+        }
+      });
+    });
+    return awaytimes;
   };
 }
