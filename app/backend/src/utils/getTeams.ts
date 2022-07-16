@@ -11,9 +11,9 @@ export default class getTeams {
     this.modeltimes = modeltimes;
   }
 
-  async getteams():Promise<Array<object>> {
+  async getteams(routes: string):Promise<Array<object>> {
     const teams = await this.modeltimes.findTeams();
-    const litsteams = await this.service.findmatchesall();
+    const litsteams = await this.service.findmatchesall(routes);
     const matches = this.returnMatches(teams, litsteams);
     const teste = matches.sort((a, b) => {
       if (a.totalPoints > b.totalPoints) return -1;
