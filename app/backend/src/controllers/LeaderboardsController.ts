@@ -6,9 +6,27 @@ export default class TeamInterfaces {
     this.utils = utils;
   }
 
-  public getMatches = async (_req: Request, res: Response): Promise<object> => {
+  public getMatchesHome = async (_req: Request, res: Response): Promise<object> => {
     try {
-      const getmatches = await this.utils.getteams();
+      const getmatches = await this.utils.getteams('home');
+      return res.status(200).json(getmatches);
+    } catch (err) {
+      return res.status(500).json({ error: err });
+    }
+  };
+
+  public getMatchesAway = async (_req: Request, res: Response): Promise<object> => {
+    try {
+      const getmatches = await this.utils.getteams('away');
+      return res.status(200).json(getmatches);
+    } catch (err) {
+      return res.status(500).json({ error: err });
+    }
+  };
+
+  public getMatchesAll = async (_req: Request, res: Response): Promise<object> => {
+    try {
+      const getmatches = await this.utils.getteams('all');
       return res.status(200).json(getmatches);
     } catch (err) {
       return res.status(500).json({ error: err });
