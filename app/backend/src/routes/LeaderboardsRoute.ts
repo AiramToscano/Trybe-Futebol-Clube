@@ -17,6 +17,8 @@ const Leaderboardscontroller = new LeaderboadsController(
   ),
 );
 
-LeaderboadsRoute.get('/leaderboard/home', Leaderboardscontroller.getMatches);
+LeaderboadsRoute.get('/leaderboard/home', Leaderboardscontroller.getMatchesHome);
+LeaderboadsRoute.get('/leaderboard/away', Leaderboardscontroller.getMatchesAway);
+LeaderboadsRoute.get('/leaderboard', Leaderboardscontroller.getMatchesAll);
 
 export default LeaderboadsRoute;
