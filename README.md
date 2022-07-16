@@ -12,7 +12,7 @@
 - A criação e associação de tabelas usando models do sequelize;
 - A construção de uma API REST com endpoints para consumir os models criados;
 - A construção de um CRUD com TypeScript, utilizando ORM;
-- Foi feito teste de integração no backend;
+- Teste de integração no backend;
 
 ---
 
