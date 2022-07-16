@@ -1,16 +1,16 @@
 import { NextFunction, Response, Request } from 'express';
-import { IserviceMatches } from '../interfaces/Matchesinterfaces';
+import { IserviceTeams } from '../interfaces/TeamInterfaces';
 import { Ijwt } from '../interfaces/LoginInterfaces';
 
 export default class ValidatorMatches {
-  constructor(private service: IserviceMatches, private jwt: Ijwt) {
+  constructor(private service: IserviceTeams, private jwt: Ijwt) {
     this.service = service;
   }
 
   MatchesNotFound = async (req: Request, res: Response, next: NextFunction) => {
     const { homeTeam, awayTeam } = req.body;
-    const hometeam = await this.service.findmatches(homeTeam);
-    const awayteam = await this.service.findmatches(awayTeam);
+    const hometeam = await this.service.findTeamsbyId(homeTeam);
+    const awayteam = await this.service.findTeamsbyId(awayTeam);
     if (!hometeam || !awayteam) {
       return res.status(404).json({ message: 'There is no team with such id!' });
     }

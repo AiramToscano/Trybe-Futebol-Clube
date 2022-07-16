@@ -20,9 +20,9 @@ export interface MatchestimesOk extends Matchestimes {
 }
 
 export interface IserviceMatchesLeaderboards {
-  findmatchesall():Promise<Array<Matchestimes>>
+  findmatchesall(routes: string):Promise<Array<Matchestimes>>
 }
 
 export interface Itteamsutils {
-  getteams():Promise<Array<object>>
+  getteams(routes: string):Promise<Array<object>>
 }

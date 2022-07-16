@@ -7,5 +7,5 @@ export interface IModelTeams {
 
 export interface IserviceTeams {
   findTeams():Promise<Teams[]>
-  findTeamsbyId(id:string):Promise<Teams>
+  findTeamsbyId(id:string):Promise<Teams | boolean>
 }

@@ -11,8 +11,9 @@ export default class TeamsServices implements IserviceTeams {
     return listteams;
   }
 
-  async findTeamsbyId(id:string):Promise<Teams> {
+  async findTeamsbyId(id:string):Promise<Teams | boolean> {
     const listteam = await this.model.findTeamsbyId(id);
+    if (listteam === null) return false;
     return listteam;
   }
 }

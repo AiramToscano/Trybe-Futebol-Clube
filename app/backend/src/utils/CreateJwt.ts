@@ -24,7 +24,10 @@ export default class CreateJWT {
     if (validToken != null) {
       const { name } = validToken as JwtPayloadHandler;
       const listUser = await this.model.findOne(name);
-      return listUser.role;
+      if (listUser != null) {
+        return listUser.role;
+      }
+      return false;
     }
     return false;
   }
